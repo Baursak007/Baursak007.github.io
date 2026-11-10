@@ -1,0 +1,19 @@
+{
+  "project_name": "Landing Page Project",
+  "current_stage": "PLANNING",
+  "active_agent": "planner-architect",
+  "stages": {
+    "PLANNING": { "status": "pending", "owner": "planner-architect" },
+    "DEVELOPMENT_FRONTEND": { "status": "pending", "owner": "frontend-engineer" },
+    "DEVELOPMENT_BACKEND": { "status": "pending", "owner": "backend-engineer" },
+    "SECURITY_AUDIT": { "status": "pending", "owner": "security-auditor" },
+    "QA_TESTING": { "status": "pending", "owner": "qa-tester" },
+    "DEPLOYMENT": { "status": "pending", "owner": "devops-deployer" }
+  },
+  "artifacts": {
+    "spec": "docs/SPEC.md",
+    "tasks": "docs/TASK_LIST.md",
+    "frontend_status": "pending",
+    "backend_status": "pending"
+  }
+}

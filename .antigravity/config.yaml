@@ -1,0 +1,9 @@
+name: "Landing Page Multi-Agent Pipeline"
+version: "1.0"
+
+pipeline:
+  workflow: ".antigravity/workflow.md"
+  state: ".antigravity/pipeline-state.json"
+  agents_directory: ".antigravity/agents/"
+
+default_orchestrator: "01-team-lead"
