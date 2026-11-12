@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const botResponses = {
         '/calc': 'Стоимость разработки лендинга под ключ стартует от 3-4 дней с проработкой смыслов и адаптива. Напишите в блок ниже или в Telegram @auramonster для точной сметы.',
         '/bot_wa': 'WhatsApp-бот подключается через официальный API или шлюз. Он автоматически отвечает клиентам 24/7, отправляет прайс, меню, записывает на прием и дублирует данные в Google Sheets или amoCRM.',
-        '/lead': 'Принято! Вы можете заполнить форму ниже в разделе [06], либо написать напрямую в Telegram: <a href="https://t.me/auramonster" target="_blank" style="color: #00f0ff; text-decoration: underline;">@auramonster</a>.',
+        '/lead': 'Принято! Вы можете заполнить форму ниже в блоке контактов, либо написать напрямую в Telegram: <a href="https://t.me/auramonster" target="_blank" style="color: #00f0ff; text-decoration: underline;">@auramonster</a>.',
         '/contact': 'Прямые каналы: Telegram: @auramonster | WhatsApp: +7 (747) 947-38-41 | Email: akmaral.koptleuova@inbox.ru'
     };
 
