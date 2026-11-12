@@ -3,343 +3,825 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio — Creative Developer</title>
+    <title>BAURSAK // CYBERNETIC WEB & BOT ARCHITECT</title>
+    <meta name="description" content="Разработка высококонверсионных сайтов, лендингов и автоматизация Telegram / WhatsApp ботов. Премиальный киберпанк дизайн и надежный код.">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
 </head>
-<body>
-    <!-- Cursor glow effect -->
-    <div class="cursor-glow" id="cursorGlow"></div>
+<body class="cyber-theme">
+    <!-- Cyberpunk ambient audio-visual elements -->
+    <div class="cyber-grid" aria-hidden="true"></div>
+    <div class="scanlines" aria-hidden="true"></div>
+    <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
-    <!-- Navigation -->
-    <nav class="nav" id="nav">
-        <a href="#" class="nav__logo">A<span class="accent">.</span></a>
-        <ul class="nav__links">
-            <li><a href="#about" class="nav__link">Обо мне</a></li>
-            <li><a href="#projects" class="nav__link">Проекты</a></li>
-            <li><a href="#skills" class="nav__link">Навыки</a></li>
-            <li><a href="#contact" class="nav__link">Контакт</a></li>
-        </ul>
-        <button class="nav__burger" id="burger" aria-label="Menu">
-            <span></span>
-            <span></span>
-        </button>
-    </nav>
+    <!-- HUD Top Bar / Navigation -->
+    <header class="hud-header" id="nav">
+        <div class="hud-container">
+            <div class="hud-brand">
+                <a href="#hero" class="hud-logo">
+                    <span class="hud-logo__glitch" data-text="BAURSAK">BAURSAK</span>
+                    <span class="hud-logo__tag">// PROTOCOL_V3.8</span>
+                </a>
+            </div>
 
-    <!-- Mobile menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <ul class="mobile-menu__links">
-            <li><a href="#about" class="mobile-menu__link">Обо мне</a></li>
-            <li><a href="#projects" class="mobile-menu__link">Проекты</a></li>
-            <li><a href="#skills" class="mobile-menu__link">Навыки</a></li>
-            <li><a href="#contact" class="mobile-menu__link">Контакт</a></li>
-        </ul>
+            <nav class="hud-nav" aria-label="Основная навигация">
+                <ul class="hud-nav__list">
+                    <li><a href="#services" class="hud-nav__link"><span class="hud-index">01</span>УСЛУГИ</a></li>
+                    <li><a href="#projects" class="hud-nav__link"><span class="hud-index">02</span>ПРОЕКТЫ</a></li>
+                    <li><a href="#terminal" class="hud-nav__link"><span class="hud-index">03</span>СИМУЛЯТОР</a></li>
+                    <li><a href="#skills" class="hud-nav__link"><span class="hud-index">04</span>СТЕК</a></li>
+                    <li><a href="#about" class="hud-nav__link"><span class="hud-index">05</span>ОБО МНЕ</a></li>
+                    <li><a href="#contact" class="hud-nav__link"><span class="hud-index">06</span>КОНТАКТ</a></li>
+                </ul>
+            </nav>
+
+            <div class="hud-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">SYS_ONLINE</span>
+                </div>
+                <a href="#contact" class="cyber-btn cyber-btn--compact">СВЯЗЬ</a>
+            </div>
+
+            <button class="hud-burger" id="burger" aria-label="Открыть меню" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile HUD Drawer -->
+    <div class="mobile-drawer" id="mobileMenu" aria-hidden="true">
+        <div class="mobile-drawer__inner">
+            <div class="drawer-header">
+                <span class="glitch-text" data-text="TERMINAL_NAV">TERMINAL_NAV</span>
+                <span class="drawer-close" id="drawerClose">&times;</span>
+            </div>
+            <ul class="mobile-drawer__list">
+                <li><a href="#services" class="mobile-link"><span class="accent-cyan">01 //</span> Услуги</a></li>
+                <li><a href="#projects" class="mobile-link"><span class="accent-cyan">02 //</span> Проекты</a></li>
+                <li><a href="#terminal" class="mobile-link"><span class="accent-cyan">03 //</span> Симулятор Ботов</a></li>
+                <li><a href="#skills" class="mobile-link"><span class="accent-cyan">04 //</span> Стек & Технологии</a></li>
+                <li><a href="#about" class="mobile-link"><span class="accent-cyan">05 //</span> Обо мне</a></li>
+                <li><a href="#contact" class="mobile-link"><span class="accent-cyan">06 //</span> Контактная связь</a></li>
+            </ul>
+            <div class="drawer-footer">
+                <a href="https://t.me/auramonster" target="_blank" class="cyber-btn cyber-btn--cyan cyber-btn--full">TELEGRAM DIRECT</a>
+            </div>
+        </div>
     </div>
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="hero__content">
-            <p class="hero__greeting reveal">Привет, я</p>
-            <h1 class="hero__name reveal">
-                <span class="hero__name-line">Creative</span>
-                <span class="hero__name-line accent">Developer<span class="blink">_</span></span>
-            </h1>
-            <p class="hero__desc reveal">
-                Создаю цифровые продукты, которые запоминаются.<br>
-                Дизайн &bull; Разработка &bull; Анимация
-            </p>
-            <div class="hero__cta reveal">
-                <a href="#projects" class="btn btn--primary">Смотреть работы</a>
-                <a href="#contact" class="btn btn--outline">Связаться</a>
-            </div>
-        </div>
-        <div class="hero__scroll">
-            <div class="hero__scroll-line"></div>
-            <span>scroll</span>
-        </div>
-    </section>
+    <main id="mainContent">
+        <!-- Hero Section -->
+        <section class="cyber-hero" id="hero">
+            <div class="container hero-grid">
+                <div class="hero-left">
+                    <div class="hero-chip">
+                        <span class="hero-chip__icon">⚡</span>
+                        <span class="hero-chip__text">NEXT-GEN WEB & BOT AUTOMATION</span>
+                    </div>
 
-    <!-- About Section -->
-    <section class="section about" id="about">
-        <div class="container">
-            <h2 class="section__title reveal">
-                <span class="section__number">01</span>
-                Обо мне
-            </h2>
-            <div class="about__grid">
-                <div class="about__photo reveal">
-                    <div class="about__photo-frame">
-                        <div class="about__photo-placeholder">
-                            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="40" cy="30" r="14" stroke="currentColor" stroke-width="2"/>
-                                <path d="M12 68c0-15.464 12.536-28 28-28s28 12.536 28 28" stroke="currentColor" stroke-width="2"/>
+                    <h1 class="hero-title">
+                        АРХИТЕКТУРА <br>
+                        <span class="glitch-title" data-text="САЙТОВ">САЙТОВ</span> & <br>
+                        <span class="neon-text-cyan">УМНЫХ БОТОВ</span><span class="terminal-caret">_</span>
+                    </h1>
+
+                    <p class="hero-subtitle">
+                        Проектирую высококонверсионные посадочные страницы, веб-приложения 
+                        и боевых ботов для <strong>Telegram & WhatsApp</strong>, которые генерируют лиды, 
+                        автоматизируют продажи и работают без сбоев 24/7.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="#contact" class="cyber-btn cyber-btn--pink">
+                            <span class="cyber-btn__glitch"></span>
+                            <span class="cyber-btn__content">ОБСУДИТЬ ПРОЕКТ // НАЧАТЬ</span>
+                        </a>
+                        <a href="#projects" class="cyber-btn cyber-btn--outline">
+                            <span class="cyber-btn__content">ИЗУЧИТЬ КЕЙСЫ</span>
+                        </a>
+                    </div>
+
+                    <div class="hero-metrics">
+                        <div class="metric-card">
+                            <span class="metric-value neon-cyan" data-target="30">0</span><span class="neon-cyan">+</span>
+                            <span class="metric-label">Сайтов & Лендингов</span>
+                        </div>
+                        <div class="metric-divider"></div>
+                        <div class="metric-card">
+                            <span class="metric-value neon-pink" data-target="15">0</span><span class="neon-pink">+</span>
+                            <span class="metric-label">Telegram & WA Ботов</span>
+                        </div>
+                        <div class="metric-divider"></div>
+                        <div class="metric-card">
+                            <span class="metric-value neon-green" data-target="99">0</span><span class="neon-green">%</span>
+                            <span class="metric-label">Uptime & Конверсия</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-right">
+                    <div class="cyber-hologram-card">
+                        <div class="hologram-header">
+                            <span class="hologram-dot red"></span>
+                            <span class="hologram-dot yellow"></span>
+                            <span class="hologram-dot green"></span>
+                            <span class="hologram-title">SYS_DIAGNOSTICS // STREAM: ACTIVE</span>
+                        </div>
+                        <div class="hologram-body">
+                            <div class="code-line"><span class="code-comment">// Инициализация протокола связи</span></div>
+                            <div class="code-line"><span class="code-kw">const</span> <span class="code-var">developer</span> = {</div>
+                            <div class="code-line indent"><span class="code-prop">name:</span> <span class="code-str">"Baursak"</span>,</div>
+                            <div class="code-line indent"><span class="code-prop">role:</span> <span class="code-str">"Web & Bot Engineer"</span>,</div>
+                            <div class="code-line indent"><span class="code-prop">capabilities:</span> [</div>
+                            <div class="code-line indent-2"><span class="code-str">"High-Converting Landing Pages"</span>,</div>
+                            <div class="code-line indent-2"><span class="code-str">"Telegram Mini Apps & Shop Bots"</span>,</div>
+                            <div class="code-line indent-2"><span class="code-str">"WhatsApp CRM Integrations"</span>,</div>
+                            <div class="code-line indent-2"><span class="code-str">"Payment Gateways & APIs"</span></div>
+                            <div class="code-line indent">],</div>
+                            <div class="code-line indent"><span class="code-prop">status:</span> <span class="code-bool">"READY_TO_DEPLOY"</span></div>
+                            <div class="code-line">};</div>
+                            <div class="code-line"><span class="code-fn">executeMission</span>(<span class="code-var">developer</span>);</div>
+                            <div class="code-line live-ping">
+                                <span class="ping-badge">SUCCESS</span>
+                                <span>Core responsive: 100% | Latency: 12ms</span>
+                            </div>
+                        </div>
+                        <div class="hologram-footer">
+                            <div class="hologram-stat">
+                                <span class="label">SEC_LEVEL</span>
+                                <span class="val green">MAXIMUM</span>
+                            </div>
+                            <div class="hologram-stat">
+                                <span class="label">TELEGRAM API</span>
+                                <span class="val cyan">CONNECTED</span>
+                            </div>
+                            <div class="hologram-stat">
+                                <span class="label">WHATSAPP CLOUD</span>
+                                <span class="val pink">SYNCHRONIZED</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="section cyber-section" id="services">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">[ 01 // СИСТЕМНЫЕ УСЛУГИ ]</span>
+                    <h2 class="section-title">ЧЕМ Я <span class="neon-text-cyan">УСИЛИВАЮ</span> ВАШ БИЗНЕС</h2>
+                    <p class="section-desc">Полный цикл разработки: от продающего концепта и анимации до интеграции ботов с приемом оплат и CRM.</p>
+                </div>
+
+                <div class="services-matrix">
+                    <!-- Service 1 -->
+                    <div class="service-panel" data-tilt>
+                        <div class="panel-corner-tl"></div>
+                        <div class="panel-corner-br"></div>
+                        <div class="service-badge">WEB DEVELOPMENT</div>
+                        <div class="service-icon-wrap">
+                            <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                                <path d="M7 8h10M7 12h4"></path>
                             </svg>
-                            <span>Твоё фото</span>
                         </div>
+                        <h3 class="service-heading">Продающие Сайты & Лендинги</h3>
+                        <p class="service-text">
+                            Разработка конверсионных лендингов, многостраничных порталов и промо-страниц с чистым кодом, высокой скоростью загрузки (PageSpeed 95+) и адаптивностью под все устройства.
+                        </p>
+                        <ul class="service-features">
+                            <li><span class="bullet">▶</span> Трендовый UI/UX дизайн и микроанимации</li>
+                            <li><span class="bullet">▶</span> Адаптивность: Mobile, Tablet, Desktop, 4K</li>
+                            <li><span class="bullet">▶</span> Базовая SEO оптимизация и аналитика</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="service-panel" data-tilt>
+                        <div class="panel-corner-tl"></div>
+                        <div class="panel-corner-br"></div>
+                        <div class="service-badge accent-green">TELEGRAM ECOSYSTEM</div>
+                        <div class="service-icon-wrap green">
+                            <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-17.5 7.5a2.25 2.25 0 0 0 .14 4.148l4.47 1.397 1.737 5.212a1.25 1.25 0 0 0 2.05.518l3.155-2.73 4.87 3.65a2.25 2.25 0 0 0 3.55-1.5l3.25-16.25a2.25 2.25 0 0 0-2.65-2.66z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="service-heading">Telegram Боты & Mini Apps</h3>
+                        <p class="service-text">
+                            Создание чат-ботов и полноценных WebApp интерфейсов прямо внутри Telegram. Автоматизация продаж, каталоги товаров, подписки, квизы и онлайн-оплата.
+                        </p>
+                        <ul class="service-features">
+                            <li><span class="bullet">▶</span> Telegram Mini Apps (WebApp) с полноценным UI</li>
+                            <li><span class="bullet">▶</span> Интеграция платежей (Kaspi, CloudPayments, Stripe)</li>
+                            <li><span class="bullet">▶</span> Админ-панели и мгновенные уведомления</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="service-panel" data-tilt>
+                        <div class="panel-corner-tl"></div>
+                        <div class="panel-corner-br"></div>
+                        <div class="service-badge accent-pink">WHATSAPP AUTOMATION</div>
+                        <div class="service-icon-wrap pink">
+                            <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="service-heading">WhatsApp Бизнес-Боты</h3>
+                        <p class="service-text">
+                            Автоматизация коммуникации с клиентами через официальные API WhatsApp Business. Мгновенные автоответы, квалификация лидов, рассылки по базам и запись на услуги.
+                        </p>
+                        <ul class="service-features">
+                            <li><span class="bullet">▶</span> Автоответчики и триггерные воронки 24/7</li>
+                            <li><span class="bullet">▶</span> Запись клиентов в Google Календарь / CRM</li>
+                            <li><span class="bullet">▶</span> Сокращение нагрузки на отдел продаж до 70%</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="service-panel" data-tilt>
+                        <div class="panel-corner-tl"></div>
+                        <div class="panel-corner-br"></div>
+                        <div class="service-badge">INTEGRATION HUB</div>
+                        <div class="service-icon-wrap">
+                            <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="service-heading">API, CRM & Базы Данных</h3>
+                        <p class="service-text">
+                            Бесшовная связка ваших сайтов и ботов с внешними сервисами: amoCRM, Bitrix24, Google Таблицами, базами данных PostgreSQL/MySQL и платежными системами.
+                        </p>
+                        <ul class="service-features">
+                            <li><span class="bullet">▶</span> Двусторонний обмен данными без потерь</li>
+                            <li><span class="bullet">▶</span> Webhook серверы и фоновые задачи</li>
+                            <li><span class="bullet">▶</span> Надежное шифрование и безопасность данных</li>
+                        </ul>
                     </div>
                 </div>
-                <div class="about__text reveal">
-                    <p class="about__lead">
-                        Я — разработчик с страстью к созданию <span class="accent">уникальных</span> цифровых решений.
-                    </p>
-                    <p>
-                        Более 3 лет опыта в веб-разработке и дизайне. Специализируюсь на создании 
-                        современных интерфейсов, которые сочетают в себе эстетику и функциональность.
-                        Каждый проект — это история, рассказанная через код.
-                    </p>
-                    <p>
-                        Верю, что лучший дизайн — тот, который не замечаешь, потому что он 
-                        просто работает. Минимализм не значит пустота — это максимум смысла 
-                        при минимуме шума.
-                    </p>
-                    <div class="about__stats">
-                        <div class="stat">
-                            <span class="stat__number accent" data-count="25">0</span><span class="accent">+</span>
-                            <span class="stat__label">Проектов</span>
+            </div>
+        </section>
+
+        <!-- Interactive Bot Simulator / Cyber Terminal -->
+        <section class="section cyber-section dark-alt" id="terminal">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">[ 02 // ИНТЕРАКТИВНЫЙ ТЕСТ ]</span>
+                    <h2 class="section-title">СИМУЛЯТОР <span class="neon-text-green">БОТА ОНЛАЙН</span></h2>
+                    <p class="section-desc">Попробуйте в действии логику реального бота прямо здесь. Выберите команду или напишите свой запрос.</p>
+                </div>
+
+                <div class="terminal-wrapper">
+                    <div class="terminal-bar">
+                        <div class="terminal-buttons">
+                            <span class="t-btn red"></span>
+                            <span class="t-btn yellow"></span>
+                            <span class="t-btn green"></span>
                         </div>
-                        <div class="stat">
-                            <span class="stat__number accent" data-count="3">0</span><span class="accent">+</span>
-                            <span class="stat__label">Лет опыта</span>
+                        <div class="terminal-title">BOT_DISPATCHER://telegram-engine-v2.5</div>
+                        <div class="terminal-mode">MODE: EMULATION</div>
+                    </div>
+
+                    <div class="terminal-window" id="terminalOutput">
+                        <div class="term-line sys">
+                            <span class="t-prompt">[SYSTEM]</span>
+                            <span class="t-msg">Инициализация виртуального бота... Готов к диалогу.</span>
                         </div>
-                        <div class="stat">
-                            <span class="stat__number accent" data-count="15">0</span><span class="accent">+</span>
-                            <span class="stat__label">Клиентов</span>
+                        <div class="term-line bot">
+                            <span class="t-prompt">[BOT]</span>
+                            <span class="t-msg">Приветствую! Я демо-бот для автоматизации заявок. Чем могу помочь вашему бизнесу сегодня?</span>
+                        </div>
+                    </div>
+
+                    <div class="terminal-chips">
+                        <button class="term-chip" data-cmd="/calc">Узнать стоимость лендинга</button>
+                        <button class="term-chip" data-cmd="/bot_wa">Как работает WhatsApp-бот?</button>
+                        <button class="term-chip" data-cmd="/lead">Оставить заявку в 1 клик</button>
+                        <button class="term-chip" data-cmd="/contact">Прямой контакт разработчика</button>
+                    </div>
+
+                    <form class="terminal-input-bar" id="terminalForm">
+                        <span class="terminal-input-prefix">&gt;</span>
+                        <input type="text" id="terminalInput" class="terminal-input-field" placeholder="Введите команду или выберите вариант выше..." autocomplete="off">
+                        <button type="submit" class="terminal-send-btn">ОТПРАВИТЬ</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section with Filter -->
+        <section class="section cyber-section" id="projects">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">[ 03 // ПОРТФОЛИО КЕЙСОВ ]</span>
+                    <h2 class="section-title">РЕАЛИЗОВАННЫЕ <span class="neon-text-pink">АРТЕФАКТЫ</span></h2>
+                    <p class="section-desc">Реальные решения, которые приносят клиентам прибыль и экономят сотни рабочих часов.</p>
+                </div>
+
+                <div class="project-filters">
+                    <button class="filter-btn active" data-filter="all">ВСЕ ПРОЕКТЫ</button>
+                    <button class="filter-btn" data-filter="landing">ЛЕНДИНГИ & САЙТЫ</button>
+                    <button class="filter-btn" data-filter="telegram">TELEGRAM БОТЫ</button>
+                    <button class="filter-btn" data-filter="whatsapp">WHATSAPP БОТЫ</button>
+                </div>
+
+                <div class="projects-grid">
+                    <!-- Project 1: Telegram Mini App -->
+                    <article class="cyber-card" data-category="telegram">
+                        <div class="card-glow"></div>
+                        <div class="card-header">
+                            <span class="card-tag accent-cyan">TELEGRAM MINI APP</span>
+                            <span class="card-year">2026</span>
+                        </div>
+                        <div class="card-visual visual-tg">
+                            <div class="visual-badge">LIVE BOT</div>
+                            <div class="visual-mockup">
+                                <div class="mockup-screen">
+                                    <span class="mock-line">⚡ Mini App Menu Loaded</span>
+                                    <span class="mock-btn-sample">Каталог товаров [Каспи Оплата]</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">CyberShop // Telegram Store & Mini App</h3>
+                            <p class="card-desc">
+                                Полноценный интернет-магазин внутри Telegram без перехода на сторонние сайты. Корзина товаров, интеграция оплаты и мгновенный проброс заказов в CRM менеджера.
+                            </p>
+                            <div class="card-metrics">
+                                <div class="c-metric">
+                                    <span class="c-val">+42%</span>
+                                    <span class="c-lbl">Конверсия в заказ</span>
+                                </div>
+                                <div class="c-metric">
+                                    <span class="c-val">0 сек</span>
+                                    <span class="c-lbl">Задержка уведомлений</span>
+                                </div>
+                            </div>
+                            <div class="card-stack">
+                                <span>Telegram Bot API</span>
+                                <span>JavaScript WebApp</span>
+                                <span>Node.js</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 2: High Conversion Landing -->
+                    <article class="cyber-card" data-category="landing">
+                        <div class="card-glow"></div>
+                        <div class="card-header">
+                            <span class="card-tag accent-pink">LANDING PAGE</span>
+                            <span class="card-year">2026</span>
+                        </div>
+                        <div class="card-visual visual-web">
+                            <div class="visual-badge">CONVERSION: 8.4%</div>
+                            <div class="visual-mockup">
+                                <div class="mockup-screen">
+                                    <span class="mock-line">🎯 High-Yield B2B Funnel</span>
+                                    <span class="mock-btn-sample">Получить расчет КП →</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Apex Logistics // B2B Корпоративный Лендинг</h3>
+                            <p class="card-desc">
+                                Продающий одностраничник для логистической компании. Интерактивный калькулятор стоимости доставки, интеграция с CRM и сквозная аналитика трафика.
+                            </p>
+                            <div class="card-metrics">
+                                <div class="c-metric">
+                                    <span class="c-val">98/100</span>
+                                    <span class="c-lbl">Google PageSpeed</span>
+                                </div>
+                                <div class="c-metric">
+                                    <span class="c-val">3.2x</span>
+                                    <span class="c-lbl">Рост заявок за месяц</span>
+                                </div>
+                            </div>
+                            <div class="card-stack">
+                                <span>HTML5 / SCSS</span>
+                                <span>Vanilla JS</span>
+                                <span>amoCRM API</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3: WhatsApp Auto-Lead Bot -->
+                    <article class="cyber-card" data-category="whatsapp">
+                        <div class="card-glow"></div>
+                        <div class="card-header">
+                            <span class="card-tag accent-green">WHATSAPP AUTOMATION</span>
+                            <span class="card-year">2026</span>
+                        </div>
+                        <div class="card-visual visual-wa">
+                            <div class="visual-badge">24/7 AUTOREPLY</div>
+                            <div class="visual-mockup">
+                                <div class="mockup-screen">
+                                    <span class="mock-line">💬 WA Business Auto-Lead</span>
+                                    <span class="mock-btn-sample">Синхронизация с базой Google ✓</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">AutoClinic // WhatsApp Бот Записи</h3>
+                            <p class="card-desc">
+                                Автоматизированный бот для клиники: мгновенно отвечает клиентам в WhatsApp, предлагает свободные слоты врачей, напоминает о визите за 2 часа и пишет данные в базу.
+                            </p>
+                            <div class="card-metrics">
+                                <div class="c-metric">
+                                    <span class="c-val">-80%</span>
+                                    <span class="c-lbl">Нагрузка операторов</span>
+                                </div>
+                                <div class="c-metric">
+                                    <span class="c-val">99.8%</span>
+                                    <span class="c-lbl">Доходимость клиентов</span>
+                                </div>
+                            </div>
+                            <div class="card-stack">
+                                <span>WhatsApp Cloud API</span>
+                                <span>Python</span>
+                                <span>Google Sheets API</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 4: Interactive Promo Landing -->
+                    <article class="cyber-card" data-category="landing">
+                        <div class="card-glow"></div>
+                        <div class="card-header">
+                            <span class="card-tag accent-pink">PROMO & BRANDING</span>
+                            <span class="card-year">2026</span>
+                        </div>
+                        <div class="card-visual visual-promo">
+                            <div class="visual-badge">IMMERSIVE UI</div>
+                            <div class="visual-mockup">
+                                <div class="mockup-screen">
+                                    <span class="mock-line">🔥 NeoBrand Launchpad</span>
+                                    <span class="mock-btn-sample">Explore Cyberpunk 3D →</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">NeoBrand // Интерактивный Промо-Сайт</h3>
+                            <p class="card-desc">
+                                Имиджевый сайт с киберпанк-эстетикой, микроанимациями и звуковым откликом для презентации новой линейки цифровых услуг IT-акселератора.
+                            </p>
+                            <div class="card-metrics">
+                                <div class="c-metric">
+                                    <span class="c-val">&lt; 0.8s</span>
+                                    <span class="c-lbl">Время загрузки</span>
+                                </div>
+                                <div class="c-metric">
+                                    <span class="c-val">100%</span>
+                                    <span class="c-lbl">Pixel-perfect адаптив</span>
+                                </div>
+                            </div>
+                            <div class="card-stack">
+                                <span>HTML5 / CSS Grid</span>
+                                <span>Canvas Effects</span>
+                                <span>UX Motion</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack Section -->
+        <section class="section cyber-section" id="skills">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">[ 04 // ТЕХНОЛОГИЧЕСКИЙ АРСЕНАЛ ]</span>
+                    <h2 class="section-title">СТЕК И <span class="neon-text-green">ИНСТРУМЕНТЫ</span></h2>
+                    <p class="section-desc">Современные инструменты для разработки ультра-быстрых интерфейсов и отказоустойчивых ботов.</p>
+                </div>
+
+                <div class="skills-cyber-grid">
+                    <!-- Column 1: Frontend & Landing -->
+                    <div class="skill-column">
+                        <div class="skill-col-header">
+                            <span class="col-icon">💻</span>
+                            <h3>Frontend & Лендинги</h3>
+                        </div>
+                        <div class="skill-bars">
+                            <div class="cyber-skill">
+                                <div class="skill-info">
+                                    <span>HTML5 / Modern Semantic UI</span>
+                                    <span class="val">98%</span>
+                                </div>
+                                <div class="skill-track"><div class="skill-fill" style="width: 98%;"></div></div>
+                            </div>
+                            <div class="cyber-skill">
+                                <div class="skill-info">
+                                    <span>CSS3 / SCSS / Cyber & Neon Styling</span>
+                                    <span class="val">95%</span>
+                                </div>
+                                <div class="skill-track"><div class="skill-fill" style="width: 95%;"></div></div>
+                            </div>
+                            <div class="cyber-skill">
+                                <div class="skill-info">
+                                    <span>JavaScript ES6+ / TypeScript</span>
+                                    <span class="val">90%</span>
+                                </div>
+                                <div class="skill-track"><div class="skill-fill" style="width: 90%;"></div></div>
+                            </div>
+                            <div class="cyber-skill">
+                                <div class="skill-info">
+                                    <span>Mobile-First Responsive & Adaptive</span>
+                                    <span class="val">100%</span>
+                                </div>
+                                <div class="skill-track"><div class="skill-fill" style="width: 100%;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Bot Engines -->
+                    <div class="skill-column">
+                        <div class="skill-col-header">
+                            <span class="col-icon">🤖</span>
+                            <h3>Telegram & WhatsApp Архитектура</h3>
+                        </div>
+                        <div class="skill-bars">
+                            <div class="cyber-skill">
+                                <div class="skill-info">
+                                    <span>Telegram Bot API & WebApps</span>
+                                    <span class="val">96%</span>
+                                </div>
+                                <div class="skill-track"><div class="skill-fill green-bar" style="width: 96%;"></div></div>
+                            </div>
+                            <div class="cyber-skill">
+                                <div class="skill-info">
+                                    <span>WhatsApp Cloud API & Green API</span>
+                                    <span class="val">92%</span>
+                                </div>
+                                <div class="skill-track"><div class="skill-fill green-bar" style="width: 92%;"></div></div>
+                            </div>
+                            <div class="cyber-skill">
+                                <div class="skill-info">
+                                    <span>Node.js / Python Bot Runtimes</span>
+                                    <span class="val">88%</span>
+                                </div>
+                                <div class="skill-track"><div class="skill-fill green-bar" style="width: 88%;"></div></div>
+                            </div>
+                            <div class="cyber-skill">
+                                <div class="skill-info">
+                                    <span>Webhooks & Server Architecture</span>
+                                    <span class="val">94%</span>
+                                </div>
+                                <div class="skill-track"><div class="skill-fill green-bar" style="width: 94%;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 3: Integrations & Payments -->
+                    <div class="skill-column">
+                        <div class="skill-col-header">
+                            <span class="col-icon">⚡</span>
+                            <h3>Интеграции & Автоматизация</h3>
+                        </div>
+                        <div class="skill-bars">
+                            <div class="cyber-skill">
+                                <div class="skill-info">
+                                    <span>CRM Systems (amoCRM, Bitrix)</span>
+                                    <span class="val">90%</span>
+                                </div>
+                                <div class="skill-track"><div class="skill-fill pink-bar" style="width: 90%;"></div></div>
+                            </div>
+                            <div class="cyber-skill">
+                                <div class="skill-info">
+                                    <span>Платежные шлюзы (Kaspi, Stripe)</span>
+                                    <span class="val">88%</span>
+                                </div>
+                                <div class="skill-track"><div class="skill-fill pink-bar" style="width: 88%;"></div></div>
+                            </div>
+                            <div class="cyber-skill">
+                                <div class="skill-info">
+                                    <span>Google Sheets & Database Connectors</span>
+                                    <span class="val">95%</span>
+                                </div>
+                                <div class="skill-track"><div class="skill-fill pink-bar" style="width: 95%;"></div></div>
+                            </div>
+                            <div class="cyber-skill">
+                                <div class="skill-info">
+                                    <span>Figma to Pixel-Perfect Code</span>
+                                    <span class="val">95%</span>
+                                </div>
+                                <div class="skill-track"><div class="skill-fill pink-bar" style="width: 95%;"></div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Projects Section -->
-    <section class="section projects" id="projects">
-        <div class="container">
-            <h2 class="section__title reveal">
-                <span class="section__number">02</span>
-                Проекты
-            </h2>
-            <div class="projects__grid">
-                <!-- Project 1 -->
-                <article class="project-card reveal">
-                    <div class="project-card__image">
-                        <div class="project-card__placeholder">
-                            <span class="project-card__placeholder-icon">🎨</span>
-                        </div>
-                        <div class="project-card__overlay">
-                            <a href="#" class="btn btn--small">Подробнее →</a>
+        <!-- About Section -->
+        <section class="section cyber-section dark-alt" id="about">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-avatar-wrapper">
+                        <div class="cyber-avatar-frame">
+                            <div class="avatar-corner c-top-left"></div>
+                            <div class="avatar-corner c-top-right"></div>
+                            <div class="avatar-corner c-bottom-left"></div>
+                            <div class="avatar-corner c-bottom-right"></div>
+                            <div class="avatar-screen">
+                                <div class="avatar-icon">
+                                    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor">
+                                        <polygon points="50 15, 85 35, 85 75, 50 95, 15 75, 15 35" stroke-width="2"/>
+                                        <circle cx="50" cy="50" r="20" stroke-width="2"/>
+                                        <circle cx="50" cy="50" r="6" fill="#00f0ff"/>
+                                        <line x1="50" y1="15" x2="50" y2="30" stroke-width="2"/>
+                                        <line x1="85" y1="75" x2="70" y2="65" stroke-width="2"/>
+                                        <line x1="15" y1="75" x2="30" y2="65" stroke-width="2"/>
+                                    </svg>
+                                </div>
+                                <div class="avatar-status-badge">ARCHITECT_ACTIVE</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="project-card__info">
-                        <div class="project-card__tags">
-                            <span class="tag">UI/UX</span>
-                            <span class="tag">React</span>
-                        </div>
-                        <h3 class="project-card__title">E-Commerce Platform</h3>
-                        <p class="project-card__desc">Современная платформа электронной коммерции с интуитивным интерфейсом</p>
-                    </div>
-                </article>
 
-                <!-- Project 2 -->
-                <article class="project-card reveal">
-                    <div class="project-card__image">
-                        <div class="project-card__placeholder">
-                            <span class="project-card__placeholder-icon">⚡</span>
-                        </div>
-                        <div class="project-card__overlay">
-                            <a href="#" class="btn btn--small">Подробнее →</a>
-                        </div>
-                    </div>
-                    <div class="project-card__info">
-                        <div class="project-card__tags">
-                            <span class="tag">Branding</span>
-                            <span class="tag">Web</span>
-                        </div>
-                        <h3 class="project-card__title">Brand Identity</h3>
-                        <p class="project-card__desc">Полная айдентика и веб-присутствие для стартапа</p>
-                    </div>
-                </article>
-
-                <!-- Project 3 -->
-                <article class="project-card reveal">
-                    <div class="project-card__image">
-                        <div class="project-card__placeholder">
-                            <span class="project-card__placeholder-icon">🚀</span>
-                        </div>
-                        <div class="project-card__overlay">
-                            <a href="#" class="btn btn--small">Подробнее →</a>
-                        </div>
-                    </div>
-                    <div class="project-card__info">
-                        <div class="project-card__tags">
-                            <span class="tag">Mobile</span>
-                            <span class="tag">Flutter</span>
-                        </div>
-                        <h3 class="project-card__title">Fitness App</h3>
-                        <p class="project-card__desc">Мобильное приложение для отслеживания тренировок и питания</p>
-                    </div>
-                </article>
-
-                <!-- Project 4 -->
-                <article class="project-card reveal">
-                    <div class="project-card__image">
-                        <div class="project-card__placeholder">
-                            <span class="project-card__placeholder-icon">🎯</span>
-                        </div>
-                        <div class="project-card__overlay">
-                            <a href="#" class="btn btn--small">Подробнее →</a>
-                        </div>
-                    </div>
-                    <div class="project-card__info">
-                        <div class="project-card__tags">
-                            <span class="tag">Dashboard</span>
-                            <span class="tag">Vue.js</span>
-                        </div>
-                        <h3 class="project-card__title">Analytics Dashboard</h3>
-                        <p class="project-card__desc">Панель аналитики с визуализацией данных в реальном времени</p>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section class="section skills" id="skills">
-        <div class="container">
-            <h2 class="section__title reveal">
-                <span class="section__number">03</span>
-                Навыки
-            </h2>
-            <div class="skills__grid">
-                <div class="skill-group reveal">
-                    <h3 class="skill-group__title">Frontend</h3>
-                    <div class="skill-group__items">
-                        <div class="skill-item">
-                            <span class="skill-item__name">HTML / CSS</span>
-                            <div class="skill-item__bar"><div class="skill-item__fill" data-width="95"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-item__name">JavaScript</span>
-                            <div class="skill-item__bar"><div class="skill-item__fill" data-width="90"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-item__name">React / Vue</span>
-                            <div class="skill-item__bar"><div class="skill-item__fill" data-width="85"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-item__name">TypeScript</span>
-                            <div class="skill-item__bar"><div class="skill-item__fill" data-width="80"></div></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-group reveal">
-                    <h3 class="skill-group__title">Backend</h3>
-                    <div class="skill-group__items">
-                        <div class="skill-item">
-                            <span class="skill-item__name">Node.js</span>
-                            <div class="skill-item__bar"><div class="skill-item__fill" data-width="85"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-item__name">Python</span>
-                            <div class="skill-item__bar"><div class="skill-item__fill" data-width="75"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-item__name">PostgreSQL</span>
-                            <div class="skill-item__bar"><div class="skill-item__fill" data-width="80"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-item__name">Docker</span>
-                            <div class="skill-item__bar"><div class="skill-item__fill" data-width="70"></div></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-group reveal">
-                    <h3 class="skill-group__title">Design</h3>
-                    <div class="skill-group__items">
-                        <div class="skill-item">
-                            <span class="skill-item__name">Figma</span>
-                            <div class="skill-item__bar"><div class="skill-item__fill" data-width="90"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-item__name">UI/UX Design</span>
-                            <div class="skill-item__bar"><div class="skill-item__fill" data-width="85"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-item__name">Motion Design</span>
-                            <div class="skill-item__bar"><div class="skill-item__fill" data-width="70"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-item__name">Prototyping</span>
-                            <div class="skill-item__bar"><div class="skill-item__fill" data-width="80"></div></div>
+                    <div class="about-bio">
+                        <span class="section-tag">[ 05 // О РАЗРАБОТЧИКЕ ]</span>
+                        <h2 class="section-title">БАУРЖАН <span class="neon-text-cyan">// BAURSAK</span></h2>
+                        <p class="bio-highlight">
+                            Специалист по созданию результативных веб-ресурсов и комплексной автоматизации клиентских каналов через Telegram и WhatsApp.
+                        </p>
+                        <p class="bio-text">
+                            Мой главный фокус — финансовая отдача и польза для клиента. Я не просто рисую макеты или пишу строки кода: я создаю цифровую инфраструктуру, где сайт привлекает и убеждает посетителей, а умные боты моментально подхватывают заявку, принимают оплату и передают клиента прямо в ваш отдел продаж.
+                        </p>
+                        
+                        <div class="about-keypoints">
+                            <div class="keypoint">
+                                <span class="kp-icon">⚡</span>
+                                <div>
+                                    <strong>Скорость и Надежность</strong>
+                                    <p>Никаких тормозящих шаблонов. Только чистый, оптимизированный код.</p>
+                                </div>
+                            </div>
+                            <div class="keypoint">
+                                <span class="kp-icon">🤖</span>
+                                <div>
+                                    <strong>Автоматизация 24/7</strong>
+                                    <p>Боты не спят и не уходят на обед — клиенты получают ответ за 1 секунду.</p>
+                                </div>
+                            </div>
+                            <div class="keypoint">
+                                <span class="kp-icon">🛡️</span>
+                                <div>
+                                    <strong>Поддержка и Запуск</strong>
+                                    <p>Помогаю с хостингом, доменом, настройкой серверов и тестированием перед сдачей.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact Section -->
-    <section class="section contact" id="contact">
-        <div class="container">
-            <h2 class="section__title reveal">
-                <span class="section__number">04</span>
-                Контакт
-            </h2>
-            <div class="contact__grid">
-                <div class="contact__info reveal">
-                    <h3 class="contact__heading">Давай создадим что-то <span class="accent">крутое</span> вместе</h3>
-                    <p>
-                        Открыт для фриланс-проектов, сотрудничества и интересных предложений. 
-                        Напиши мне — обсудим твою идею.
-                    </p>
-                    <div class="contact__links">
-                        <a href="mailto:akmaral.koptleuova@inbox.ru" class="contact__link">
-                            <span class="contact__link-icon">✉</span>
-                            akmaral.koptleuova@inbox.ru
+        <!-- Contact Section -->
+        <section class="section cyber-section" id="contact">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">[ 06 // ТОЧКА КОНТАКТА ]</span>
+                    <h2 class="section-title">ЗАПУСТИТЬ <span class="neon-text-pink">ВАШ ПРОЕКТ</span></h2>
+                    <p class="section-desc">Опишите задачу — я предложу лучшее техническое решение, рассчитаю смету и сроки запуска.</p>
+                </div>
+
+                <div class="contact-layout">
+                    <!-- Contact Cards -->
+                    <div class="contact-channels">
+                        <a href="https://t.me/auramonster" target="_blank" class="contact-card tg-card">
+                            <div class="c-card-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-17.5 7.5a2.25 2.25 0 0 0 .14 4.148l4.47 1.397 1.737 5.212a1.25 1.25 0 0 0 2.05.518l3.155-2.73 4.87 3.65a2.25 2.25 0 0 0 3.55-1.5l3.25-16.25a2.25 2.25 0 0 0-2.65-2.66z"></path>
+                                </svg>
+                            </div>
+                            <div class="c-card-info">
+                                <span class="c-card-label">TELEGRAM (БЫСТРЫЙ ОТВЕТ)</span>
+                                <span class="c-card-value">@auramonster</span>
+                            </div>
+                            <span class="c-card-action">НАПИСАТЬ →</span>
                         </a>
-                        <a href="https://t.me/auramonster" class="contact__link" target="_blank">
-                            <span class="contact__link-icon">✈</span>
-                            @auramonster
+
+                        <a href="https://wa.me/77479473841" target="_blank" class="contact-card wa-card">
+                            <div class="c-card-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                                </svg>
+                            </div>
+                            <div class="c-card-info">
+                                <span class="c-card-label">WHATSAPP БИЗНЕС</span>
+                                <span class="c-card-value">+7 (747) 947-38-41</span>
+                            </div>
+                            <span class="c-card-action">НАПИСАТЬ →</span>
                         </a>
-                        <a href="https://wa.me/77479473841" class="contact__link" target="_blank">
-                            <span class="contact__link-icon">📱</span>
-                            WhatsApp
+
+                        <a href="mailto:akmaral.koptleuova@inbox.ru" class="contact-card mail-card">
+                            <div class="c-card-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </div>
+                            <div class="c-card-info">
+                                <span class="c-card-label">EMAIL СВЯЗЬ</span>
+                                <span class="c-card-value">akmaral.koptleuova@inbox.ru</span>
+                            </div>
+                            <span class="c-card-action">ОТПРАВИТЬ →</span>
                         </a>
-                        <a href="https://github.com/Baursak007" class="contact__link" target="_blank">
-                            <span class="contact__link-icon">⌘</span>
-                            GitHub
+
+                        <a href="https://github.com/Baursak007" target="_blank" class="contact-card gh-card">
+                            <div class="c-card-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                                </svg>
+                            </div>
+                            <div class="c-card-info">
+                                <span class="c-card-label">GITHUB РЕПОЗИТОРИЙ</span>
+                                <span class="c-card-value">github.com/Baursak007</span>
+                            </div>
+                            <span class="c-card-action">ОТКРЫТЬ →</span>
                         </a>
+                    </div>
+
+                    <!-- Direct Order Cyber Form -->
+                    <div class="contact-form-wrap">
+                        <form class="cyber-form" id="contactForm">
+                            <div class="form-title-bar">
+                                <span class="bar-signal"></span>
+                                <span>TERMINAL_FORM // DISPATCH_REQUEST</span>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label for="userName">ВАШЕ ИМЯ *</label>
+                                    <input type="text" id="userName" class="cyber-input" placeholder="Алексей" required>
+                                </div>
+                                <div class="form-field">
+                                    <label for="userContact">ТЕЛЕФОН / TELEGRAM *</label>
+                                    <input type="text" id="userContact" class="cyber-input" placeholder="@username или +7..." required>
+                                </div>
+                            </div>
+
+                            <div class="form-field">
+                                <label>ТИП ПРОЕКТА *</label>
+                                <div class="radio-chips">
+                                    <label class="radio-chip">
+                                        <input type="radio" name="projectType" value="landing" checked>
+                                        <span>Лендинг / Сайт</span>
+                                    </label>
+                                    <label class="radio-chip">
+                                        <input type="radio" name="projectType" value="telegram">
+                                        <span>Telegram Бот</span>
+                                    </label>
+                                    <label class="radio-chip">
+                                        <input type="radio" name="projectType" value="whatsapp">
+                                        <span>WhatsApp Бот</span>
+                                    </label>
+                                    <label class="radio-chip">
+                                        <input type="radio" name="projectType" value="complex">
+                                        <span>Сайт + Бот под ключ</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="userMessage">ОПИСАНИЕ ЗАДАЧИ</label>
+                                <textarea id="userMessage" class="cyber-input cyber-textarea" rows="4" placeholder="Кратко расскажите о вашей нише и целях..."></textarea>
+                            </div>
+
+                            <button type="submit" class="cyber-btn cyber-btn--pink cyber-btn--full">
+                                <span class="cyber-btn__glitch"></span>
+                                <span class="cyber-btn__content">ОТПРАВИТЬ ЗАЯВКУ В СИСТЕМУ →</span>
+                            </button>
+
+                            <div class="form-status-msg" id="formStatus"></div>
+                        </form>
                     </div>
                 </div>
-                <form class="contact__form reveal" id="contactForm">
-                    <div class="form-group">
-                        <input type="text" class="form-input" placeholder="Имя" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" class="form-input" placeholder="Email" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea class="form-input form-textarea" placeholder="Сообщение" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn--primary btn--full">
-                        Отправить сообщение
-                        <span class="btn__arrow">→</span>
-                    </button>
-                </form>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container footer__inner">
-            <p class="footer__copy">&copy; 2026 — Все права защищены</p>
-            <div class="footer__socials">
-                <a href="https://github.com/Baursak007" target="_blank" class="footer__social" aria-label="GitHub">GH</a>
-                <a href="https://t.me/auramonster" target="_blank" class="footer__social" aria-label="Telegram">TG</a>
-                <a href="https://wa.me/77479473841" target="_blank" class="footer__social" aria-label="WhatsApp">WA</a>
-                <a href="mailto:akmaral.koptleuova@inbox.ru" class="footer__social" aria-label="Email">@</a>
+    <footer class="cyber-footer">
+        <div class="container footer-content">
+            <div class="footer-left">
+                <span class="footer-logo">BAURSAK<span class="accent-cyan">.DEV</span></span>
+                <p class="footer-sub">Архитектура сайтов и ботов. 2026. All Systems Operational.</p>
+            </div>
+            <div class="footer-socials">
+                <a href="https://t.me/auramonster" target="_blank" class="f-social" aria-label="Telegram">TG</a>
+                <a href="https://wa.me/77479473841" target="_blank" class="f-social" aria-label="WhatsApp">WA</a>
+                <a href="https://github.com/Baursak007" target="_blank" class="f-social" aria-label="GitHub">GH</a>
+                <a href="mailto:akmaral.koptleuova@inbox.ru" class="f-social" aria-label="Email">@</a>
             </div>
         </div>
     </footer>

@@ -1,180 +1,246 @@
-/* ============================
-   Main Script
-   ============================ */
+/* ==========================================================================
+   CYBERNETIC INTERACTIVITY & TERMINAL DISPATCHER
+   ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // ---- Cursor Glow ----
+    // 1. Interactive Cursor Glow
     const cursorGlow = document.getElementById('cursorGlow');
-    let mouseX = 0, mouseY = 0;
-    let glowX = 0, glowY = 0;
+    if (cursorGlow && window.matchMedia('(pointer: fine)').matches) {
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let currentX = mouseX;
+        let currentY = mouseY;
 
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        cursorGlow.classList.add('active');
-    });
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
 
-    document.addEventListener('mouseleave', () => {
-        cursorGlow.classList.remove('active');
-    });
-
-    function animateGlow() {
-        glowX += (mouseX - glowX) * 0.08;
-        glowY += (mouseY - glowY) * 0.08;
-        cursorGlow.style.left = glowX + 'px';
-        cursorGlow.style.top = glowY + 'px';
-        requestAnimationFrame(animateGlow);
+        const updateCursor = () => {
+            currentX += (mouseX - currentX) * 0.12;
+            currentY += (mouseY - currentY) * 0.12;
+            cursorGlow.style.left = `${currentX}px`;
+            cursorGlow.style.top = `${currentY}px`;
+            requestAnimationFrame(updateCursor);
+        };
+        requestAnimationFrame(updateCursor);
     }
-    animateGlow();
 
-    // ---- Nav Scroll ----
+    // 2. HUD Header Scroll State
     const nav = document.getElementById('nav');
-    let lastScroll = 0;
-
     window.addEventListener('scroll', () => {
-        const currentScroll = window.scrollY;
-        if (currentScroll > 50) {
+        if (window.scrollY > 40) {
             nav.classList.add('scrolled');
         } else {
             nav.classList.remove('scrolled');
         }
-        lastScroll = currentScroll;
     });
 
-    // ---- Burger Menu ----
+    // 3. Mobile Navigation Drawer
     const burger = document.getElementById('burger');
     const mobileMenu = document.getElementById('mobileMenu');
+    const drawerClose = document.getElementById('drawerClose');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
 
-    burger.addEventListener('click', () => {
-        burger.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
-        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-    });
-
-    // Close mobile menu on link click
-    document.querySelectorAll('.mobile-menu__link').forEach(link => {
-        link.addEventListener('click', () => {
-            burger.classList.remove('active');
+    const toggleMenu = (open) => {
+        if (open) {
+            mobileMenu.classList.add('active');
+            mobileMenu.setAttribute('aria-hidden', 'false');
+            burger.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden';
+        } else {
             mobileMenu.classList.remove('active');
+            mobileMenu.setAttribute('aria-hidden', 'true');
+            burger.setAttribute('aria-expanded', 'false');
             document.body.style.overflow = '';
-        });
-    });
+        }
+    };
 
-    // ---- Reveal on Scroll ----
-    const reveals = document.querySelectorAll('.reveal');
+    if (burger && mobileMenu) {
+        burger.addEventListener('click', () => toggleMenu(true));
+        if (drawerClose) drawerClose.addEventListener('click', () => toggleMenu(false));
+        mobileLinks.forEach(link => link.addEventListener('click', () => toggleMenu(false)));
+    }
 
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                // Stagger animation
-                const delay = Array.from(entry.target.parentElement.children)
-                    .filter(c => c.classList.contains('reveal'))
-                    .indexOf(entry.target) * 100;
+    // 4. Metrics Number Counter on Scroll (IntersectionObserver)
+    const metricValues = document.querySelectorAll('.metric-value');
+    let counted = false;
 
-                setTimeout(() => {
-                    entry.target.classList.add('visible');
-                }, delay);
+    const countUp = (el) => {
+        const target = parseInt(el.getAttribute('data-target'), 10);
+        let start = 0;
+        const duration = 1800;
+        const stepTime = 30;
+        const step = Math.ceil(target / (duration / stepTime));
 
-                revealObserver.unobserve(entry.target);
+        const timer = setInterval(() => {
+            start += step;
+            if (start >= target) {
+                el.textContent = target;
+                clearInterval(timer);
+            } else {
+                el.textContent = start;
             }
-        });
-    }, {
-        threshold: 0.15,
-        rootMargin: '0px 0px -50px 0px'
-    });
+        }, stepTime);
+    };
 
-    reveals.forEach(el => revealObserver.observe(el));
-
-    // ---- Skill Bars Animation ----
-    const skillFills = document.querySelectorAll('.skill-item__fill');
-
-    const skillObserver = new IntersectionObserver((entries) => {
+    const metricObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const width = entry.target.getAttribute('data-width');
-                entry.target.style.width = width + '%';
-                entry.target.classList.add('animated');
-                skillObserver.unobserve(entry.target);
+            if (entry.isIntersecting && !counted) {
+                metricValues.forEach(val => countUp(val));
+                counted = true;
             }
         });
     }, { threshold: 0.5 });
 
-    skillFills.forEach(fill => skillObserver.observe(fill));
+    const heroMetrics = document.querySelector('.hero-metrics');
+    if (heroMetrics) metricObserver.observe(heroMetrics);
 
-    // ---- Counter Animation ----
-    const counters = document.querySelectorAll('.stat__number[data-count]');
+    // 5. Project Filtering Logic
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.cyber-card');
 
-    const counterObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const target = parseInt(entry.target.getAttribute('data-count'));
-                const duration = 1500;
-                const start = performance.now();
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
 
-                function updateCounter(currentTime) {
-                    const elapsed = currentTime - start;
-                    const progress = Math.min(elapsed / duration, 1);
-                    // Ease out cubic
-                    const eased = 1 - Math.pow(1 - progress, 3);
-                    entry.target.textContent = Math.round(target * eased);
+            const filterValue = btn.getAttribute('data-filter');
 
-                    if (progress < 1) {
-                        requestAnimationFrame(updateCounter);
-                    }
+            projectCards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                if (filterValue === 'all' || category === filterValue) {
+                    card.style.display = 'flex';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 50);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(15px)';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 250);
                 }
-
-                requestAnimationFrame(updateCounter);
-                counterObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-
-    counters.forEach(counter => counterObserver.observe(counter));
-
-    // ---- Smooth Scroll for anchor links ----
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+            });
         });
     });
 
-    // ---- Contact Form ----
-    const contactForm = document.getElementById('contactForm');
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const btn = contactForm.querySelector('.btn');
-        const originalText = btn.innerHTML;
-        btn.innerHTML = '✓ Отправлено!';
-        btn.style.background = 'var(--blood-bright)';
+    // 6. Interactive Bot Simulator / Cyber Terminal
+    const terminalOutput = document.getElementById('terminalOutput');
+    const terminalForm = document.getElementById('terminalForm');
+    const terminalInput = document.getElementById('terminalInput');
+    const termChips = document.querySelectorAll('.term-chip');
+
+    const appendMessage = (sender, text, type) => {
+        const line = document.createElement('div');
+        line.className = `term-line ${type}`;
+
+        const prompt = document.createElement('span');
+        prompt.className = 't-prompt';
+        prompt.textContent = sender;
+
+        const msg = document.createElement('span');
+        msg.className = 't-msg';
+        msg.innerHTML = text;
+
+        line.appendChild(prompt);
+        line.appendChild(msg);
+        terminalOutput.appendChild(line);
+        terminalOutput.scrollTop = terminalOutput.scrollHeight;
+    };
+
+    const botResponses = {
+        '/calc': 'Стоимость разработки лендинга под ключ стартует от 3-4 дней с проработкой смыслов и адаптива. Напишите в блок ниже или в Telegram @auramonster для точной сметы.',
+        '/bot_wa': 'WhatsApp-бот подключается через официальный API или шлюз. Он автоматически отвечает клиентам 24/7, отправляет прайс, меню, записывает на прием и дублирует данные в Google Sheets или amoCRM.',
+        '/lead': 'Принято! Вы можете заполнить форму ниже в разделе [06], либо написать напрямую в Telegram: <a href="https://t.me/auramonster" target="_blank" style="color: #00f0ff; text-decoration: underline;">@auramonster</a>.',
+        '/contact': 'Прямые каналы: Telegram: @auramonster | WhatsApp: +7 (747) 947-38-41 | Email: akmaral.koptleuova@inbox.ru'
+    };
+
+    const handleCommand = (cmdText) => {
+        const cleanCmd = cmdText.trim();
+        if (!cleanCmd) return;
+
+        appendMessage('[USER]', cleanCmd, 'user');
 
         setTimeout(() => {
-            btn.innerHTML = originalText;
-            btn.style.background = '';
-            contactForm.reset();
-        }, 2500);
+            const matchedKey = Object.keys(botResponses).find(k => cleanCmd.toLowerCase().includes(k.replace('/', '')) || cleanCmd === k);
+            if (matchedKey) {
+                appendMessage('[BOT]', botResponses[matchedKey], 'bot');
+            } else if (cleanCmd.toLowerCase().includes('цен') || cleanCmd.toLowerCase().includes('стоим')) {
+                appendMessage('[BOT]', 'Стоимость зависит от сложности: лендинг (от $150), бот с базовой логикой (от $100), сложный Mini App с оплатой (от $350). Давайте обсудим детали!', 'bot');
+            } else if (cleanCmd.toLowerCase().includes('привет') || cleanCmd.toLowerCase().includes('здравствуй')) {
+                appendMessage('[BOT]', 'Приветствую! Готов помочь автоматизировать рутину и запустить быстрый сайт для ваших продаж.', 'bot');
+            } else {
+                appendMessage('[BOT]', `Команда принята в обработку. Рекомендую связаться напрямую в Telegram <a href="https://t.me/auramonster" target="_blank" style="color: #00f0ff;">@auramonster</a> — я на связи практически всегда.`, 'bot');
+            }
+        }, 400);
+    };
+
+    if (terminalForm && terminalInput) {
+        terminalForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const text = terminalInput.value;
+            terminalInput.value = '';
+            handleCommand(text);
+        });
+    }
+
+    termChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            const cmd = chip.getAttribute('data-cmd');
+            handleCommand(cmd);
+        });
     });
 
-    // ---- Active nav link on scroll ----
-    const sections = document.querySelectorAll('.section');
-    const navLinks = document.querySelectorAll('.nav__link');
+    // 7. Cyber Contact Form with Interactive Feedback
+    const contactForm = document.getElementById('contactForm');
+    const formStatus = document.getElementById('formStatus');
 
-    const sectionObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.getAttribute('id');
-                navLinks.forEach(link => {
-                    link.style.color = '';
-                    if (link.getAttribute('href') === '#' + id) {
-                        link.style.color = 'var(--white)';
-                    }
-                });
-            }
+    if (contactForm && formStatus) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('userName').value.trim();
+            const contact = document.getElementById('userContact').value.trim();
+            const projectType = document.querySelector('input[name="projectType"]:checked').value;
+            const message = document.getElementById('userMessage').value.trim();
+
+            formStatus.className = 'form-status-msg';
+            formStatus.innerHTML = '<span style="color: #00f0ff;">[СИСТЕМА] Шифрование и отправка данных пакета...</span>';
+
+            setTimeout(() => {
+                formStatus.className = 'form-status-msg success';
+                formStatus.innerHTML = `[УСПЕХ] Заявка от <strong>${name}</strong> принята! Открываю Telegram для мгновенного подтверждения...`;
+
+                const telegramText = encodeURIComponent(
+                    `⚡ НОВАЯ ЗАЯВКА С САЙТА:\nИмя: ${name}\nКонтакт: ${contact}\nТип: ${projectType}\nЗадача: ${message || 'Не указано'}`
+                );
+
+                setTimeout(() => {
+                    window.open(`https://t.me/auramonster?text=${telegramText}`, '_blank');
+                    contactForm.reset();
+                }, 1200);
+            }, 800);
         });
-    }, { threshold: 0.3 });
+    }
 
-    sections.forEach(section => sectionObserver.observe(section));
+    // 8. 3D Tilt Effect on Service Panels
+    const tiltPanels = document.querySelectorAll('[data-tilt]');
+    if (window.matchMedia('(pointer: fine)').matches) {
+        tiltPanels.forEach(panel => {
+            panel.addEventListener('mousemove', (e) => {
+                const rect = panel.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                const rotateX = (-y / rect.height) * 8;
+                const rotateY = (x / rect.width) * 8;
+                panel.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+            });
+
+            panel.addEventListener('mouseleave', () => {
+                panel.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
+            });
+        });
+    }
 });
